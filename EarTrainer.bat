@@ -1,1 +1,1 @@
-java -cp "lib/Ear Trainer.jar" main.EarTrainer
+java -cp "lib/Ear Trainer.jar" core.EarTrainer
