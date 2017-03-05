@@ -28,7 +28,17 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
-task runEarTrainer (type:JavaExec) {
+task deployLibs(type:Copy) {
+    from('build/libs')
+    into('output/lib')
+}
+
+task deploy(type:Copy, dependsOn:['build','deployLibs']) {
+    from('EarTrainer.bat')
+    into('output')
+}
+
+task runEarTrainer(type:JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
-    main = 'EarTrainer'
+    main = 'core.EarTrainer'
 }
