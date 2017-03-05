@@ -38,6 +38,11 @@ task deploy(type:Copy, dependsOn:['build','deployLibs']) {
     into('output')
 }
 
+task zipOutput(type:Zip) {
+    baseName = 'ear_trainer'
+    from('output')
+}
+
 task runEarTrainer(type:JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     main = 'core.EarTrainer'
