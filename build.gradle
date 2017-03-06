@@ -27,6 +27,11 @@ dependencies {
     testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
 }
 
+task deployConfig(type:Copy) {
+    from('output-resources/settings.xml')
+    into('output/config')
+}
+
 task deployLibs(type:Copy) {
     from configurations.runtime
     into('output/lib')
@@ -37,8 +42,8 @@ task deployLocalLibs(type:Copy) {
     into('output/lib')
 }
 
-task deploy(type:Copy, dependsOn:['build','deployLibs', 'deployLocalLibs']) {
-    from('EarTrainer.bat')
+task deploy(type:Copy, dependsOn:['build','deployLibs', 'deployLocalLibs', 'deployConfig']) {
+    from('output-resources/EarTrainer.bat')
     into('output')
 }
 
@@ -47,7 +52,9 @@ task zipOutput(type:Zip) {
     from('output')
 }
 
-task runEarTrainer(type:JavaExec) {
-    classpath = sourceSets.main.runtimeClasspath
+task runEarTrainer(type:JavaExec, dependsOn:'deploy') {
+    // Run from the output directory
+    classpath = files('output/lib/Ear Trainer.jar', "output/lib/", "output/config") +
+            fileTree(dir: 'output/lib', include: '*.jar')
     main = 'main.EarTrainer'
 }
