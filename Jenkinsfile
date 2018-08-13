@@ -18,6 +18,11 @@ gradle clean'''
         sh 'gradle build'
       }
     }
+    stage('Deploy') {
+      steps {
+        sh 'gradle zipOutput'
+      }
+    }
     stage('Report') {
       steps {
         junit 'build\\reports\\tests\\test\\index.html'
@@ -25,7 +30,7 @@ gradle clean'''
     }
     stage('Archive') {
       steps {
-        archiveArtifacts 'output\\*'
+        archiveArtifacts '*.zip'
       }
     }
   }
