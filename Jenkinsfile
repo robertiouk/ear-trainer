@@ -20,7 +20,8 @@ gradle clean'''
     }
     stage('Deploy') {
       steps {
-        sh 'gradle zipOutput'
+        sh '''gradle deploy
+gradle zipOutput'''
       }
     }
     stage('Report') {
