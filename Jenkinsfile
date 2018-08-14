@@ -35,7 +35,7 @@ gradle clean'''
     }
     stage('Report') {
       steps {
-        junit 'build/reports/**/*.xml'
+        junit 'build/test-results/**/*.xml'
       }
     }
     stage('Archive') {
