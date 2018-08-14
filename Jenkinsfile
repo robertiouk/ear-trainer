@@ -26,7 +26,7 @@ gradle zipOutput'''
     }
     stage('Report') {
       steps {
-        junit 'build/reports/tests/test/index.html'
+        junit 'build/reports/**/*.xml'
       }
     }
     stage('Archive') {
