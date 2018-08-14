@@ -40,7 +40,7 @@ gradle clean'''
     }
     stage('Archive') {
       steps {
-        archiveArtifacts '*.zip'
+        archiveArtifacts 'build/distributions/*.zip'
       }
     }
   }
